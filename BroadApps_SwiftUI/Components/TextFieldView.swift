@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct TextFieldView: View {
-
+    let type: UIKeyboardType
     @Binding var text: String
     let placeholder: String
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(lineWidth: 1.0)
-                .frame(width: .infinity, height: 62)
+                .frame(maxWidth: .infinity)
+                .frame(height: 67)
                 .foregroundColor(.gray)
 
             TextField("", text: $text)
@@ -25,6 +26,7 @@ struct TextFieldView: View {
                     Text(placeholder).foregroundColor(.gray)
                         .padding(.leading, 20)
                 }
+                .keyboardType(type)
         }
     }
 }
@@ -35,13 +37,13 @@ extension View {
         alignment: Alignment = .leading,
         @ViewBuilder placeholder: () -> Content) -> some View {
 
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
+            ZStack(alignment: alignment) {
+                placeholder().opacity(shouldShow ? 1 : 0)
+                self
+            }
         }
-    }
 }
 
 #Preview {
-    TextFieldView(text: .constant(""), placeholder: "Headline")
+    TextFieldView(type: .default, text: .constant(""), placeholder: "Headline")
 }

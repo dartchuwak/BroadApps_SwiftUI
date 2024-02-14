@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct PostsCell: View {
+    let post: Post
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(formatDate(date:post.date))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                Spacer()
+            }
+
+            Text(post.title)
+                .font(.headline)
+                .foregroundColor(.white)
+        }
+        .padding(30)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .background(Color(.appPrimary).opacity(0.15))
+        .cornerRadius(30)
+    }
+
+    func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        let dateString = formatter.string(from: date)
+        return dateString
     }
 }
 
 #Preview {
-    PostsCell()
+    PostsCell(post: Post(title: "Title", text: "Post Text", date: Date()))
 }

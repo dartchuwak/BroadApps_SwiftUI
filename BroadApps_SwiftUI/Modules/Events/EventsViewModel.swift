@@ -7,12 +7,34 @@
 
 import SwiftUI
 
-struct EventsViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+protocol EventsViewModelProtocol: ObservableObject {
+    var events: [Event] { get }
+    func saveEvent(event: Event)
 }
 
-#Preview {
-    EventsViewModel()
+
+final class EventsViewModel: ObservableObject, EventsViewModelProtocol {
+    @Published var events: [Event] = []
+
+    func saveEvent(event: Event) {
+        events.append(event)
+    }
+
+    func delete(item: Event) {
+        events.removeAll(where: {$0.id == item.id})
+    }
+
+}
+
+struct Event: Hashable {
+    let date: String
+    let location: String
+    let teams: Teams
+    let score: String
+    let id = UUID()
+}
+
+struct Teams: Hashable {
+    let team1 : String
+    let team2 : String
 }

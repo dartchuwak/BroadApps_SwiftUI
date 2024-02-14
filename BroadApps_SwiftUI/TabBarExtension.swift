@@ -1,5 +1,5 @@
 //
-//  dsda.swift
+//  TabBarExtension.swift
 //  BroadApps_SwiftUI
 //
 //  Created by Evgenii Mikhailov on 10.02.2024.
@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SwiftUI
+
+
 extension UIApplication {
     var key: UIWindow? {
         self.connectedScenes

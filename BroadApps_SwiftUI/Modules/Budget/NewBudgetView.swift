@@ -8,11 +8,74 @@
 import SwiftUI
 
 struct NewBudgetView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var vm: BudgetViewModel
+    let type: BudgetType
+    let screenTitle: String
+    @State var title: String = ""
+    @State var date: String = ""
+    @State var sum: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color(.appBlack)
+                .ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 0) {
+                Text(screenTitle)
+                    .font(.largeTitle)
+                    .padding(.bottom, 40)
+                    .foregroundColor(.white)
+
+                TextFieldView(type: .default, text: $title, placeholder: "Title")
+                Spacer().frame(height: 15)
+                HStack(spacing: 15) {
+                    DateTextField(text: $date, placeholder: "Date")
+                    TextFieldView(type: .numberPad, text: $sum, placeholder: "Sum")
+                }
+                .padding(.bottom, 102)
+
+                Button(action: {
+                    let budget = Budget(type: type, date: date, text: title, sum: sum)
+                    vm.saveBudget(item: budget)
+
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Add")
+                        .font(.body)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(20)
+                        .background(Color(.appPrimary))
+                        .cornerRadius(20)
+
+                })
+
+
+                Spacer()
+            }
+            .padding()
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "chevron.left")
+                })
+            }
+        }
     }
 }
 
 #Preview {
-    NewBudgetView()
+    NewBudgetView(type: .income, screenTitle: "New income")
+        .environmentObject(BudgetViewModel())
+}
+
+
+enum BudgetType: String,CaseIterable, Identifiable, Equatable {
+    var id: Self { self }
+    case income = "New income"
+    case expense = "New expense"
 }

@@ -8,11 +8,64 @@
 import SwiftUI
 
 struct PostsView: View {
+
+    @EnvironmentObject var vm: PostsViewModel
+    @State var showNewPostView = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ZStack {
+                Color.appBlack
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        Text("Posts")
+                            .font(.largeTitle)
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+
+                    ScrollView {
+                        if vm.posts.isEmpty {
+                            VStack(spacing: 10) {
+                                Text("No posts added")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                Text("You don't have any posts added")
+                                    .font(.body)
+                                    .foregroundColor(.appTabBar)
+                            }
+                            .padding(.top, 200)
+                        } else {
+                            ForEach(vm.posts, id:\.self) { post in
+                                PostsCell(post: post)
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+
+                NavigationLink(destination: NewPostView(), isActive: $showNewPostView) {
+                    EmptyView()
+                }
+            }
+            .showTabBar()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        showNewPostView.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(Color(.appPrimary))
+                    })
+
+                }
+            }
+        }
     }
 }
 
 #Preview {
     PostsView()
+        .environmentObject(PostsViewModel())
 }

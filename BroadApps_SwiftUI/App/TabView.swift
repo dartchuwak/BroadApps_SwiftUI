@@ -14,6 +14,30 @@ struct MainTabVew: View {
                 .tabItem {
                     Label("Articles", systemImage: "doc.fill")
                 }
+
+            EventsView()
+                .tabItem {
+                    Label("Events", systemImage: "trophy.fill")
+                }
+
+            BudgetView()
+                .tabItem {
+                    Label("Budget", systemImage: "dollarsign.circle.fill")
+                }
+
+            PostsView()
+                .tabItem {
+                    Label("Posts", systemImage: "doc.richtext.fill")
+                }
+
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
+        }
+        .onAppear() {
+            UITabBar.appearance().barTintColor = UIColor(.appTabBar)
+            UITabBar.appearance().backgroundColor = UIColor(.appTab)
         }
     }
 }
