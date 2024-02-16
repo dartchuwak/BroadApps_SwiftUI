@@ -31,10 +31,9 @@ struct NewPostView: View {
             .padding()
             VStack {
                 Spacer()
-
                 Button(action: {
                     let date = Date()
-                    let post = Post(title: title, text: text, date: date)
+                    let post = Post(title: title, text: text, date: date, id: UUID().uuidString)
                     vm.savePost(post: post)
                     presentationMode.wrappedValue.dismiss()
                 }, label: {

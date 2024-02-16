@@ -18,6 +18,14 @@ struct ArticleDetailsView: View {
                 .ignoresSafeArea()
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
+                    Text(article.headline)
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    Spacer()
+
+                }
+
+                HStack {
                     Text(article.status.rawValue)
                         .foregroundColor(.white)
                     Spacer()
@@ -32,7 +40,6 @@ struct ArticleDetailsView: View {
             }
             .padding(.horizontal)
         }
-        .navigationTitle(article.headline)
         .navigationBarBackButtonHidden()
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
@@ -56,6 +63,6 @@ struct ArticleDetailsView: View {
 }
 
 #Preview {
-    ArticleDetailsView(article: Article(headline: "Headline", tag: "football", status: .writing, publisher: "Publisher", text: "Text"))
+    ArticleDetailsView(article: Article(headline: "Headline", tag: "football", status: .writing, publisher: "Publisher", text: "Text", id: UUID().uuidString))
         .environmentObject(ArticlesViewModel())
 }

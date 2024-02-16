@@ -21,6 +21,7 @@ struct DateTextField: View {
                 .foregroundColor(.gray)
 
             TextField("", text: $text)
+                .foregroundColor(.white)
                 .placeholder(when: text.isEmpty, placeholder: {
                     Text(placeholder)
                 })

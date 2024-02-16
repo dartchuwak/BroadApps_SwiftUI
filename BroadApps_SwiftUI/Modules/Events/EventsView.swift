@@ -26,7 +26,7 @@ struct EventsView: View {
                             .foregroundColor(.white)
                         Spacer()
                     }
-                    .padding(.horizontal)
+                    
                     if vm.events.isEmpty {
                         VStack(spacing: 10) {
                             Text("No events added")
@@ -50,6 +50,7 @@ struct EventsView: View {
                     }
                     Spacer()
                 }
+                .padding(.horizontal)
 
 
                 NavigationLink(destination: NewEventView(vm: vm), isActive: $isShowingNewEventView) {

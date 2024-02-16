@@ -35,7 +35,7 @@ struct NewBudgetView: View {
                 .padding(.bottom, 102)
 
                 Button(action: {
-                    let budget = Budget(type: type, date: date, text: title, sum: sum)
+                    let budget = Budget(type: type, date: date, text: title, sum: sum, id: UUID().uuidString)
                     vm.saveBudget(item: budget)
 
                     presentationMode.wrappedValue.dismiss()
@@ -73,9 +73,3 @@ struct NewBudgetView: View {
         .environmentObject(BudgetViewModel())
 }
 
-
-enum BudgetType: String,CaseIterable, Identifiable, Equatable {
-    var id: Self { self }
-    case income = "New income"
-    case expense = "New expense"
-}

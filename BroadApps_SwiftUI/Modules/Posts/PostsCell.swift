@@ -38,5 +38,5 @@ struct PostsCell: View {
 }
 
 #Preview {
-    PostsCell(post: Post(title: "Title", text: "Post Text", date: Date()))
+    PostsCell(post: Post(title: "Title", text: "Post Text", date: Date(), id: UUID().uuidString))
 }

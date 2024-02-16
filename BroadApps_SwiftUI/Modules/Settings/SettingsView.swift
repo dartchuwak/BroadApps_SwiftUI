@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
     @State var isRateVisible: Bool = false
     @State var isResetVisible: Bool = false
+
     var body: some View {
         ZStack {
             Color(.appBlack)
@@ -27,7 +29,7 @@ struct SettingsView: View {
                 SettingsCell(isReset: false, image: "square.and.arrow.up.fill", title: "Share app")
                 SettingsCell(isReset: false, image: "star.fill", title: "Rate app")
                     .onTapGesture {
-                        isRateVisible.toggle()
+                        rateApp()
                     }
                 SettingsCell(isReset: false, image: "doc.text.fill", title: "Usage profile")
                 SettingsCell(isReset: true, image: "arrow.triangle.2.circlepath", title: "Reset progress")
@@ -47,14 +49,17 @@ struct SettingsView: View {
 
             }
 
-            if isRateVisible {
-                RateView(isVisible: $isRateVisible)
-            }
-
             if isResetVisible {
                 ResetView(isVisible: $isResetVisible)
             }
         }
+    }
+
+    func rateApp() {
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+        }
+
     }
 }
 

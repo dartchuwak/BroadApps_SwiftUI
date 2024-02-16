@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct NewArticleView: View {
+struct EditArticle: View {
+    let article: Article
     @State var uiTabarController: UITabBarController?
     @Environment(\.presentationMode) var dismiss
     @State var headline: String = ""
@@ -18,7 +19,7 @@ struct NewArticleView: View {
     @EnvironmentObject var vm: ArticlesViewModel
 
     let tags = ["basketball", "football", "volleyball", "hockey", "box", "golf", "other"]
-    
+
     var body: some View {
         ZStack {
             Color(.appBlack)
@@ -47,19 +48,19 @@ struct NewArticleView: View {
                 TextFieldView(type: .default, text: $publisher, placeholder: "Publisher")
                 TextFieldView(type: .default, text: $text, placeholder: "Article text")
                 Spacer()
-                
+
                 Button(action: {
-                    vm.saveNewArticle(article: Article(headline: headline, tag: tagSelection, status: status, publisher: publisher, text: text))
+                    vm.saveNewArticle(article: Article(headline: headline, tag: tagSelection, status: status, publisher: publisher, text: text, id: UUID().uuidString))
                     dismiss.wrappedValue.dismiss()
                 }, label: {
-                    Text("Add")
+                    Text("Save")
                         .foregroundColor(.white)
                         .padding(20)
                         .frame(maxWidth: .infinity)
                         .background(Color(.appPrimary))
                         .cornerRadius(20)
                 })
-                
+
             }
             .padding(.top, 10)
             .padding(.horizontal)
@@ -75,6 +76,13 @@ struct NewArticleView: View {
                     }
             }
         })
+        .onAppear {
+            headline = article.headline
+            publisher = article.publisher
+            text = article.text
+            status = article.status
+            tagSelection = article.tag
+        }
     }
 }
 

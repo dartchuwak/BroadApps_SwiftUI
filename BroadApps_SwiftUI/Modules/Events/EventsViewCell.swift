@@ -34,5 +34,5 @@ struct EventsViewCell: View {
 }
 
 #Preview {
-    EventsViewCell(event: Event(date: "23.01.2023", location: "Sky Arena, Denver", teams: Teams(team1: "Eves", team2: "Toronto"), score: "1:0"))
+    EventsViewCell(event: Event(date: "23.01.2023", location: "Sky Arena, Denver", teams: Teams(team1: "Eves", team2: "Toronto"), score: "1:0", id: UUID().uuidString))
 }

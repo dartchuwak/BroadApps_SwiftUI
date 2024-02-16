@@ -17,6 +17,12 @@ struct EventDetailsView: View {
                 .ignoresSafeArea()
             VStack {
                 HStack {
+                    Text("\(event.teams.team1) VS \(event.teams.team2)")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                HStack {
                     Text(event.location)
                         .foregroundColor(.gray)
                         .font(.subheadline)
@@ -48,7 +54,6 @@ struct EventDetailsView: View {
 
         }
         .hiddenTabBar()
-        .navigationTitle(Text("\(event.teams.team1) VS \(event.teams.team2)"))
         .navigationBarBackButtonHidden()
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
@@ -71,6 +76,6 @@ struct EventDetailsView: View {
 }
 
 #Preview {
-    EventDetailsView(event: Event(date: "23.16.2021", location: "Sky Arena, Denver", teams: Teams(team1: "Febers", team2: "Toronto"), score: "1:0"))
+    EventDetailsView(event: Event(date: "23.16.2021", location: "Sky Arena, Denver", teams: Teams(team1: "Febers", team2: "Toronto"), score: "1:0", id: UUID().uuidString))
         .environmentObject(EventsViewModel())
 }

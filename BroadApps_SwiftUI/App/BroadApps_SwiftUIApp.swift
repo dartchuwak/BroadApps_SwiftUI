@@ -28,6 +28,7 @@ struct BroadApps_SwiftUIApp: App {
                         .environmentObject(postsViewModel)
                         .environmentObject(eventsViewModel)
                         .environmentObject(articlesViewModel)
+
                 } else {
                     OnboardingView(isViewed: $isOnboardingViewed)
                         .ignoresSafeArea()

@@ -27,6 +27,13 @@ struct NewEventView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 16) {
+
+                HStack {
+                    Text("New event")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    Spacer()
+                }
                 HStack {
                     TextFieldView(type: .default, text: $team1, placeholder: "Team 01")
                     TextFieldView(type: .numberPad, text: $team1Score, placeholder: "Team 01 scrore")
@@ -55,7 +62,7 @@ struct NewEventView: View {
                 Spacer()
 
                 Button(action: {
-                    let event = Event(date: date, location: location, teams: Teams(team1: team1, team2: team2), score: "1:0")
+                    let event = Event(date: date, location: location, teams: Teams(team1: team1, team2: team2), score: "1:0", id: UUID().uuidString)
                     vm.saveEvent(event: event)
                     presentationMode.wrappedValue.dismiss()
                 }) {
@@ -82,7 +89,6 @@ struct NewEventView: View {
 
         })
         .navigationBarBackButtonHidden()
-        .navigationTitle("New Event")
         .hiddenTabBar()
     }
 }

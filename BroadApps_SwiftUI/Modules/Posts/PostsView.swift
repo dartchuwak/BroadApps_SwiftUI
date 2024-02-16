@@ -38,7 +38,13 @@ struct PostsView: View {
                             .padding(.top, 200)
                         } else {
                             ForEach(vm.posts, id:\.self) { post in
-                                PostsCell(post: post)
+                                NavigationLink {
+                                    PostDetailsView(post: post)
+                                } label: {
+                                    PostsCell(post: post)
+                                }
+
+
                             }
                         }
                     }

@@ -12,22 +12,23 @@ struct TextFieldView: View {
     @Binding var text: String
     let placeholder: String
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(lineWidth: 1.0)
-                .frame(maxWidth: .infinity)
-                .frame(height: 67)
-                .foregroundColor(.gray)
 
-            TextField("", text: $text)
-                .padding(.leading, 20)
-                .foregroundColor(.white)
-                .placeholder(when: text.isEmpty) {
-                    Text(placeholder).foregroundColor(.gray)
-                        .padding(.leading, 20)
-                }
-                .keyboardType(type)
-        }
+        TextField("", text: $text)
+            .frame(height: 62)
+            .padding(.leading, 20)
+            .foregroundColor(.white)
+            .placeholder(when: text.isEmpty) {
+                Text(placeholder).foregroundColor(.gray)
+                    .padding(.leading, 20)
+            }
+            .keyboardType(type)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(lineWidth: 1.0)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 62)
+                    .foregroundColor(.gray)
+            )
     }
 }
 

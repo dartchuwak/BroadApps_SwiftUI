@@ -46,7 +46,7 @@ struct GridCell: View {
 }
 
 #Preview {
-    GridCell(item: Budget(type: .income, date: "23.01.01", text: "Budget", sum: "200", id: UUID()))
+    GridCell(item: Budget(type: .income, date: "23.01.01", text: "Budget", sum: "200", id: UUID().uuidString))
         .frame(width: 171)
         .environment(\.colorScheme, .dark)
         .environmentObject(BudgetViewModel())
