@@ -29,31 +29,14 @@ struct ResetView: View {
                 .multilineTextAlignment(.center)
             Divider()
             Button(action: {
-//                let config = Realm.Configuration(
-//                    // Установи новую версию схемы. Она должна быть выше предыдущей версии (если это первая миграция, предыдущая версия была 0).
-//                    schemaVersion: 2,
-//
-//                    // Блок миграции будет вызван автоматически при открытии Realm с новой схемой.
-//                    migrationBlock: { migration, oldSchemaVersion in
-//                        // Мы еще не выполняли миграцию, поэтому oldSchemaVersion == 0
-//                        if (oldSchemaVersion < 2) {
-//                            // Ничего не делаем, если добавление новых полей, Realm автоматически обработает это
-//                            // Если есть необходимость в преобразовании данных, это делаем здесь
-//                        }
-//                    }
-//                )
-//
-//                // Устанавливаем измененную конфигурацию по умолчанию для Realm
-//                Realm.Configuration.defaultConfiguration = config
-
-                // Теперь, при попытке открыть файл Realm, будет выполнена миграция, если это необходимо
                 do {
                     let realm = try Realm()
                     try realm.write {
                         realm.deleteAll()
                     }
+                    isVisible.toggle()
                 } catch {
-                    print("Ошибка при удалении всех объектов из Realm или при миграции: \(error)")
+                    print("Error: \(error)")
                 }
 
 
