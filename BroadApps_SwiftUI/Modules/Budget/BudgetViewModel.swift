@@ -33,9 +33,12 @@ final class BudgetViewModel: ObservableObject {
         }
     }
 
+    func wipeAll() {
+        income.removeAll()
+        expences.removeAll()
+    }
+
     func saveBudget(item: Budget) {
-
-
         let object = BudgetRealm(type: item.type, date: item.date, text: item.text, sum: item.sum, id: item.id)
         do {
             let realm = try Realm()

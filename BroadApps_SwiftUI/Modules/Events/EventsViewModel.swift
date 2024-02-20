@@ -36,6 +36,10 @@ final class EventsViewModel: ObservableObject, EventsViewModelProtocol {
         events.append(event)
     }
 
+    func wipeAll() {
+        events.removeAll()
+    }
+
     func delete(item: Event) {
         do {
             let realm = try Realm()

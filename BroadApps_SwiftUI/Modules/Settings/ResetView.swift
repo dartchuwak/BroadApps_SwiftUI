@@ -12,6 +12,11 @@ import RealmSwift
 struct ResetView: View {
 
     @Binding var isVisible: Bool
+    @EnvironmentObject var postVM: PostsViewModel
+    @EnvironmentObject var articleVM: ArticlesViewModel
+    @EnvironmentObject var budgetVM: BudgetViewModel
+    @EnvironmentObject var eventsVM: EventsViewModel
+
     var body: some View {
         VStack(spacing: 0) {
 
@@ -29,17 +34,7 @@ struct ResetView: View {
                 .multilineTextAlignment(.center)
             Divider()
             Button(action: {
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        realm.deleteAll()
-                    }
-                    isVisible.toggle()
-                } catch {
-                    print("Error: \(error)")
-                }
-
-
+                wipeAllData()
             }, label: {
                 Text("Reset")
                     .fontWeight(.semibold)
@@ -50,7 +45,7 @@ struct ResetView: View {
             Button(action: {
                 isVisible.toggle()
             }, label: {
-            Text("Cancel")
+                Text("Cancel")
                     .font(.body)
                     .foregroundColor(Color(.appRed))
             })
@@ -59,6 +54,22 @@ struct ResetView: View {
         .frame(width: 270, height: 183)
         .background(Color(.appGray))
         .cornerRadius(16)
+    }
+
+    func wipeAllData() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+            postVM.wipeAll()
+            articleVM.wipeAll()
+            budgetVM.wipeAll()
+            eventsVM.wipeAll()
+            isVisible.toggle()
+        } catch {
+            print("Error: \(error)")
+        }
     }
 }
 

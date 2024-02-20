@@ -44,6 +44,10 @@ class PostsViewModel: ObservableObject {
         }
     }
 
+    func wipeAll() {
+        posts.removeAll()
+    }
+
     func loadPosts() {
         let config = Realm.Configuration(
             schemaVersion: 2,

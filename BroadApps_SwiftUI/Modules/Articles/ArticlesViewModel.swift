@@ -31,6 +31,9 @@ final class ArticlesViewModel: ObservableObject {
         }
 
     }
+    func wipeAll() {
+        articles.removeAll()
+    }
 
 
     func saveNewArticle(article: Article) {
