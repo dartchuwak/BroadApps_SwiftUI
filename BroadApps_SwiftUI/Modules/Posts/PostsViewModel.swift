@@ -22,22 +22,23 @@ class PostsViewModel: ObservableObject {
             let object = PostRealm(title: post.title, text: post.text, date: post.date, id: post.id)
             try realm.write {
                 realm.add(object)
-                posts.append(post)
+
             }
         } catch {
             print( error)
         }
+
+        posts.append(post)
     }
 
     func deletePost(post: Post) {
         do {
             let realm = try Realm()
             if let object = realm.object(ofType: PostRealm.self, forPrimaryKey: post.id) {
-                print(object)
                 try realm.write {
                     realm.delete(object)
                 }
-            } else { print ("No")}
+            } else { }
             posts.removeAll(where: {$0.id == post.id})
         } catch {
             print(error.localizedDescription)

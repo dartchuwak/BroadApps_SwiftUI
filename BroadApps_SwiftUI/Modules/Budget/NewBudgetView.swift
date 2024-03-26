@@ -37,7 +37,6 @@ struct NewBudgetView: View {
                 Button(action: {
                     let budget = Budget(type: type, date: date, text: title, sum: sum, id: UUID().uuidString)
                     vm.saveBudget(item: budget)
-
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Add")
